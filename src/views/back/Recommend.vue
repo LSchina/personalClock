@@ -1,48 +1,83 @@
 <template>
 <div id="recommend_container">
-  <div style="width: 100%;height: 20%;background-color: #4d317a;border-radius: 20px;display: flex">
-    <div style="margin: auto;letter-spacing: 3px;font-size: 25px;font-weight: 600;color: white;font-family: 楷体;">系统推荐任务作为前端登录页面的门面，是勾起消费者兴趣的保障,嘿嘿嘿</div>
-  </div>
+  <el-card style="width: 100%;height: 20%;border-radius: 20px;display: flex">
+    <div style="margin: auto;letter-spacing: 3px;font-size: 20px;text-align: center">系统推荐任务作为前端登录页面的门面，是勾起消费者兴趣的保障,嘿嘿嘿</div>
+  </el-card>
   <div style="width: 100%;height: 70%;display: flex;justify-content: space-between;margin-top: 3%">
-    <div
-        style="letter-spacing: 3px;font-size: 20px;font-weight: 600;color: white;font-family: 楷体;width: 40%;height: 100%;border-radius: 20px;background-color: #4d317a;box-sizing: border-box;padding: 30px"
+    <el-card
+        style="letter-spacing: 3px;font-size: 15px;color: black;width: 40%;height: 100%;border-radius: 20px;box-sizing: border-box;padding: 10px"
         v-for="item in dataList.value"
         :key="item"
     >
-      <div style="width: 100%;height: 10%;display: flex;justify-content: space-between">
-        <div>任务主题</div>
-        <div>{{item.theme}}</div>
+      <el-form :label-position="'top'">
+      <el-form-item label="任务主题" >
+        <el-input    disabled v-model="item.name" />
+      </el-form-item>
+      <el-form-item label="任务名称" label-position="top">
+        <el-input      disabled v-model="item.theme" />
+      </el-form-item>
+      <el-form-item    disabled label="任务内容" :label-position="'top'">
+        <el-input    disabled v-model="item.comment" />
+      </el-form-item>
+      <el-form-item label="创建时间" label-position="top">
+        <el-input disabled v-model="item.createTime" />
+      </el-form-item>
+      <div style="width: 100%;height: 10%;display: flex;justify-content: center;align-items: center;">
+        <el-button @click="getRecommendData(item.id)" style="width: 100%;height: 100%"><div style="letter-spacing: 2px">修改系统推荐任务</div></el-button>
       </div>
-      <div style="width: 100%;height: 10%;display: flex;justify-content: space-between;margin-top: 7.5%">
-        <div>任务名称</div>
-        <div>{{item.name}}</div>
-      </div>
-      <div style="width: 100%;height: 30%;display: flex;justify-content: space-between;margin-top: 7.5%">
-        <div style="width: 40%">任务内容</div>
-        <div style="width: 60%">{{item.comment}}</div>
-      </div>
-      <div style="width: 100%;height: 10%;display: flex;justify-content: space-between;margin-top: 0.5%">
-        <div>任务创建时间</div>
-        <div>{{formatDateTimeForHMS(item.createTime)}}</div>
-      </div>
-      <div style="width: 100%;height: 10%;display: flex;justify-content: center;align-items: center;margin-top: 5.5%">
-        <el-button @click="exitRecommend(item.id)" style="width: 100%;height: 100%"><div style="letter-spacing: 2px">修改系统推荐任务</div></el-button>
-      </div>
-    </div>
+      </el-form>
+    </el-card>
   </div>
 </div>
+
+  <el-dialog v-model="dialogFormVisible" style="height: 300px;" title="修改系统推荐任务信息" width="700">
+    <el-form :model="exitForm">
+      <el-form-item label="任务主题"  :label-width="180">
+        <el-input style="width: 300px" v-model="exitForm.theme"/>
+      </el-form-item>
+      <el-form-item label="任务名称" :label-width="180">
+        <el-input  style="width: 300px" v-model="exitForm.name"/>
+      </el-form-item>
+      <el-form-item label="任务内容" :label-width="180">
+        <el-input
+            v-model="exitForm.comment"
+            style="width: 300px"
+            :rows="2"
+            type="textarea"
+            placeholder="请输入您的学习内容"
+        />
+      </el-form-item>
+    </el-form>
+    <template #footer>
+      <div class="dialog-footer">
+        <el-button @click="dialogFormVisible = false">取消</el-button>
+        <el-button type="primary" @click="exitRecommend">
+          确定
+        </el-button>
+      </div>
+    </template>
+  </el-dialog>
 </template>
 
 <script setup>
+import { ElMessage } from 'element-plus'
 
-
-import {onMounted, reactive} from "vue";
+import {onMounted, reactive, ref} from "vue";
 import instance from "../../api/request.js";
 
 const dataList = reactive([])
 
+const exitForm = reactive({
+  id:'',
+  theme:'',
+  name:'',
+  comment:''
+})
+
+const dialogFormVisible = ref(false)
+
 onMounted(() =>{
-  instance.get('/task/recommend').then( res => {
+  instance.get('/btask/recommend').then( res => {
     if (res.data.code == '200'){
       dataList.value = res.data.list
       console.log(res.data.list)
@@ -50,8 +85,29 @@ onMounted(() =>{
   })
 })
 
-const exitRecommend = (id) => {
+const getRecommendData = (id) => {
+  dialogFormVisible.value = true
+  exitForm.id = id
+  instance.get('/btask/get/' + id).then(res => {
+    if (res.data.code == '200') {
+      exitForm.name = res.data.task.name
+      exitForm.theme = res.data.task.theme
+      exitForm.comment = res.data.task.comment
+    }
+  })
+}
 
+const exitRecommend = () => {
+  instance.post('/btask/exit',exitForm).then( res =>{
+    if (res.data.code == '200'){
+      ElMessage({
+        message: '修改成功！',
+        type: 'success',
+      })
+    }
+  })
+  dialogFormVisible.value = false
+  location.reload()
 }
 
 function formatDateTimeForHMS(obj) {
@@ -73,5 +129,7 @@ function formatDateTimeForHMS(obj) {
 #recommend_container{
   width: 100%;
   height: 100%;
+  box-sizing: border-box;
+  padding: 30px;
 }
 </style>

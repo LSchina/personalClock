@@ -16,7 +16,47 @@ const router = createRouter({
         },
         {
             path: "/",
-            redirect:'/backLogin'
+            redirect:'/theme'
+        },
+        {
+            path: "/login",
+            component: () => import("../views/Login.vue")
+        },
+        {
+            path: "/front",
+            component: () => import("../views/front/Home.vue"),
+            redirect:'/front/index',
+            children:[
+                {
+                    path:'/front/index',
+                    component: () => import("../views/front/Index.vue")
+                },
+                {
+                    path:'/front/system',
+                    component: () => import("../views/front/System.vue")
+                },
+                {
+                    path:'/front/task',
+                    component: () => import("../views/front/Task.vue")
+                },
+                {
+                    path:'/front/ding',
+                    component: () => import("../views/front/Ding.vue")
+                },
+               {
+                    path:'/front/add',
+                    component: () => import("../views/front/TaskAdd.vue")
+                },
+                {
+                    path: '/front/exitMe',
+                    component: () => import("../views/front/ExitMessage.vue")
+                },
+
+            ]
+        },
+        {
+            path: "/theme",
+            component: () => import("../views/front/Theme.vue")
         },
         {
             path: "/back",
@@ -38,6 +78,10 @@ const router = createRouter({
                 {
                     path: "/back/poster",
                     component: () => import("../views/back/Poster.vue")
+                },
+                {
+                    path: "/back/ding",
+                    component: () => import("../views/back/Ding.vue")
                 },
                 {
                     path: "/back/task",

@@ -54,7 +54,7 @@
         </el-table-column>
       </el-table>
     </div>
-    <div style="width: 100%;height: 10%;display: flex;background-color: #3f2766;align-items: end">
+    <div style="width: 100%;height: 10%;display: flex;align-items: end">
       <el-pagination
           :page-size="query.pageSize"
           v-model:current-page="query.pageNo"
@@ -62,7 +62,7 @@
           background
           layout="prev, pager, next"
           @change="searchUser"
-          :total="total"/>
+          :total="20"/>
     </div>
   </div>
 
@@ -202,6 +202,7 @@ function formatDateTimeForHMS(obj) {
 #user_container{
   width: 100%;
   height: 100%;
-
+  box-sizing: border-box;
+  padding: 20px;
 }
 </style>

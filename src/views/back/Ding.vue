@@ -1,7 +1,7 @@
 <template>
-  <div id="task_container">
+  <div id="ding_container">
     <div style="width: 100%;height: 10%;display: flex">
-      <div style="display: flex;width: 100%;height: 100%;align-items: center;justify-content: space-between">
+      <div style="display: flex;width: 100%;height: 100%;align-items: center;">
         <div style="display: flex">
           <el-input
               v-model="query.username"
@@ -11,9 +11,9 @@
               :prefix-icon="Search"
           />
 
-          <el-button @click="searchTask"  type="primary" size="large"  style="margin-left: 2%">搜索</el-button>
+          <el-button @click="searchDing"  type="primary" size="large"  style="margin-left: 2%">搜索</el-button>
         </div>
-        <div style="display: flex">
+        <div style="display: flex;margin-left: 150px">
           <el-input
               v-model="query.theme"
               style="width: 280px"
@@ -21,17 +21,7 @@
               placeholder="输入任务主题"
               :prefix-icon="Search"
           />
-          <el-button  @click="searchTask"   type="primary" size="large"  style="margin-left: 2%">搜索</el-button>
-        </div>
-        <div style="display: flex">
-          <el-input
-              v-model="query.name"
-              style="width: 280px"
-              size="large"
-              placeholder="输入任务名称"
-              :prefix-icon="Search"
-          />
-          <el-button  @click="searchTask"   type="primary" size="large"  style="margin-left: 2%">搜索</el-button>
+          <el-button  @click="searchDing"   type="primary" size="large"  style="margin-left: 2%">搜索</el-button>
         </div>
       </div>
     </div>
@@ -43,22 +33,12 @@
         <el-table-column prop="name" label="任务名称" width="180" />
         <el-table-column prop="username" label="用户账号" width="180" />
         <el-table-column prop="theme" label="任务主题" width="180" />
-        <el-table-column label="任务剩余时间" width="180">
-          <template #default="scope">
-            {{scope.row.duration <= 0 ? 0: scope.row.duration}}
-          </template>
+        <el-table-column  prop="timeCou" label="打卡所用时间" width="180">
         </el-table-column>
-        <el-table-column  label="创建时间" width="180" >
-          <template #default="scope">{{ formatDateTimeForHMS(scope.row.createTime) }}</template>
+        <el-table-column  label="打卡时间" width="180" >
+          <template #default="scope">{{ formatDateTimeForHMS(scope.row.finishTime) }}</template>
         </el-table-column>
-        <el-table-column prop="status"   label="状态" width="180">
-          <template #default="scope">
-        <span>
-            {{scope.row.status == 1 ?'进行中': '已结束'}}
-        </span>
-          </template>
-        </el-table-column>
-        <el-table-column prop="comment" label="任务内容" width="250" >
+        <el-table-column prop="comment"   label="任务内容" width="250" >
         </el-table-column>
         <el-table-column label="操作">
           <template #default="scope">
@@ -80,8 +60,8 @@
           style="margin: auto"
           background
           layout="prev, pager, next"
-          @change="searchTask"
-          :total="20"/>
+          @change="searchDing"
+          :total="38"/>
     </div>
   </div>
 
@@ -101,14 +81,13 @@ const tableData = reactive([])
 
 const query = reactive({
   username:'',
-  name:'',
   theme:'',
   pageNo: 1,
   pageSize: 7
 })
 
-const searchTask = () => {
-  instance.post('/btask/page',query).then(res =>{
+const searchDing = () => {
+  instance.post('/dingb/page',query).then(res =>{
     console.log(query)
     if (res.data.code == '200'){
       tableData.value = res.data.page.list
@@ -119,7 +98,7 @@ const searchTask = () => {
 }
 
 onMounted(() =>{
-  instance.post('/btask/page',query).then(res =>{
+  instance.post('/dingb/page',query).then(res =>{
     console.log(query)
     if (res.data.code == '200'){
       tableData.value = res.data.page.list
@@ -130,7 +109,7 @@ onMounted(() =>{
 })
 
 const handleDelete = (index, row) => {
-  instance.delete('/btask/delete/'+ row.id).then(res =>{
+  instance.delete('/dingb/delete'+ row.id).then(res =>{
     if (res.data.code == '200'){
       ElMessage({
         message: '删除成功',
@@ -159,7 +138,7 @@ function formatDateTimeForHMS(obj) {
 </script>
 
 <style scoped>
-#task_container{
+#ding_container{
   width: 100%;
   height: 100%;
   box-sizing: border-box;

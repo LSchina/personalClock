@@ -21,10 +21,10 @@
       </div>
       <div class="container_left_title">
         <div>
-          <div style="letter-spacing: 2px;font-size: 20px;font-weight: 600;color: white;font-family: 楷体">个人学习养成后台
+          <div style="letter-spacing: 2px;font-size: 20px;font-weight: 600;color: black;font-family: 楷体">个人学习养成后台
           </div>
           <div
-              style="letter-spacing: 2px;font-size: 25px;font-weight: 600;color: white;font-family: 楷体;margin-top: 20px">
+              style="letter-spacing: 2px;font-size: 25px;font-weight: 600;color: black;font-family: 楷体;margin-top: 20px">
             在下面列表中，可以检查您的完成情况
           </div>
         </div>
@@ -45,7 +45,7 @@
         <VDatePicker :is-dark="false" v-model="date" mode="date" expanded/>
       </div>
       <div style="width: 100%;margin-top: 10px">
-        <el-button @click="backToday" style="width: 100%;border-radius: 8px;background-color: #4d317a;height: 40px">
+        <el-button type="primary" @click="backToday" style="width: 100%;border-radius: 8px;height: 40px">
           <div style="color: white;font-weight: 600;letter-spacing: 2px;font-family: 楷体;font-size: 18px">回到今天</div>
         </el-button>
       </div>
@@ -101,7 +101,7 @@ const searchBaidu = () => {
       margin-top: 50px;
       width: 100%;
       height: 120px;
-      background-color: #4d317a;
+      background-color: white;
       border-radius: 18px;
     }
     .container_input {
