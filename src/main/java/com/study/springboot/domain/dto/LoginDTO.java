@@ -4,9 +4,11 @@ package com.study.springboot.domain.dto;
 import lombok.Data;
 
 @Data
-public class LoignDTO {
+public class LoginDTO {
 
     private String username;
 
     private String password;
+
+    private String newPass;
 }

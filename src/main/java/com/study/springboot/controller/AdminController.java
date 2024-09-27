@@ -3,11 +3,10 @@ package com.study.springboot.controller;
 
 import com.study.springboot.common.R;
 import com.study.springboot.domain.AdminQuery;
-import com.study.springboot.domain.dto.LoignDTO;
+import com.study.springboot.domain.dto.LoginDTO;
 import com.study.springboot.domain.dto.PageDTO;
 import com.study.springboot.domain.dto.UserDTO;
 import com.study.springboot.domain.pojo.Admin;
-import com.study.springboot.domain.pojo.User;
 import com.study.springboot.service.AdminService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +19,7 @@ public class AdminController {
     private final AdminService adminService;
 
     @PostMapping("/login")
-    public R adminLogin(LoignDTO dto){
+    public R adminLogin(LoginDTO dto){
         Admin admin = adminService.adminLogin(dto);
         return R.ok().put("admin",admin);
     }

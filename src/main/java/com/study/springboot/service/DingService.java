@@ -1,7 +1,10 @@
 package com.study.springboot.service;
 
+import com.study.springboot.domain.dto.DingDTO;
+import com.study.springboot.domain.dto.PageDTO;
 import com.study.springboot.domain.pojo.Ding;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.study.springboot.domain.vo.DingVO;
 
 /**
 * @author 86151
@@ -10,4 +13,9 @@ import com.baomidou.mybatisplus.extension.service.IService;
 */
 public interface DingService extends IService<Ding> {
 
+    PageDTO<DingVO> pageDing(DingDTO dto);
+
+    void addDing(Long id);
+
+    PageDTO<DingVO> getDing(DingDTO query);
 }

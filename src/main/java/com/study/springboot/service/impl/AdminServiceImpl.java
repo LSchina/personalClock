@@ -3,13 +3,11 @@ package com.study.springboot.service.impl;
 import cn.hutool.crypto.SecureUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.study.springboot.common.R;
 import com.study.springboot.domain.AdminQuery;
-import com.study.springboot.domain.dto.LoignDTO;
+import com.study.springboot.domain.dto.LoginDTO;
 import com.study.springboot.domain.dto.PageDTO;
 import com.study.springboot.domain.dto.UserDTO;
 import com.study.springboot.domain.pojo.Admin;
-import com.study.springboot.domain.pojo.User;
 import com.study.springboot.service.AdminService;
 import com.study.springboot.mapper.AdminMapper;
 import com.study.springboot.utils.CollUtils;
@@ -31,7 +29,7 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin>
     private static final String PASS_SALT = "songjunhao";
 
     @Override
-    public Admin adminLogin(LoignDTO dto) {
+    public Admin adminLogin(LoginDTO dto) {
         if (StringUtils.isEmpty(dto.getUsername()) || StringUtils.isEmpty(dto.getPassword())){
             throw new RuntimeException("账号或者密码为空");
         }

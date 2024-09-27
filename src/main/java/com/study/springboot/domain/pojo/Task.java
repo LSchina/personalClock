@@ -34,7 +34,7 @@ public class Task implements Serializable {
     /**
      * 
      */
-    private Integer userId;
+    private Long userId;
 
     /**
      * 
@@ -52,8 +52,8 @@ public class Task implements Serializable {
     private Integer status;
 
     /**
-     * 
+     *
      */
-    private Date finishTime;
+    private Long duration;
 
 }

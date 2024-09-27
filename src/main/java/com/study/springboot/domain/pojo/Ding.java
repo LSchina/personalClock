@@ -25,16 +25,21 @@ public class Ding implements Serializable {
     /**
      * 
      */
-    private Integer userId;
+    private Long userId;
 
     /**
      * 
      */
-    private Integer taskId;
+    private Long taskId;
 
     /**
      * 
      */
     private Date createTime;
+
+    /**
+     *
+     */
+    private Long timeCou;
 
    }

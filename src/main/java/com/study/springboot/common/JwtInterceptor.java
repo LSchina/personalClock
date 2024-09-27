@@ -47,7 +47,7 @@ public class JwtInterceptor implements HandlerInterceptor {
         try {
             adminId = JWT.decode(token).getAudience().get(0);
             // 根据token中的userid查询数据库
-            admin = userService.getById(Integer.parseInt(adminId));
+            admin = userService.getById(Long.parseLong(adminId));
         } catch (Exception e) {
             String errMsg = "token验证失败，请重新登录";
             log.error(errMsg + ", token=" + token, e);

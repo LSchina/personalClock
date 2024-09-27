@@ -3,13 +3,16 @@ package com.study.springboot.controller;
 
 import com.study.springboot.common.R;
 import com.study.springboot.domain.AdminQuery;
+import com.study.springboot.domain.dto.LoginDTO;
 import com.study.springboot.domain.dto.PageDTO;
 import com.study.springboot.domain.dto.UserDTO;
 import com.study.springboot.domain.pojo.User;
 import com.study.springboot.service.UserService;
+import com.study.springboot.utils.TokenUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 @RestController
@@ -19,6 +22,19 @@ public class UserController {
 
 
     private final UserService userService;
+
+    @PostMapping("/login")
+    public R userLogin(LoginDTO dto) throws UnsupportedEncodingException {
+        User user = userService.userLogin(dto);
+        String token = TokenUtils.genToken(String.valueOf(user.getId()), user.getPassword());
+        return R.ok().put("user", user).put("token",token);
+    }
+
+    @PostMapping("/register")
+    public R userRegister(LoginDTO dto){
+        userService.userRegister(dto);
+        return R.ok();
+    }
 
     @GetMapping("/list")
     public R userList(){
@@ -39,7 +55,7 @@ public class UserController {
     }
 
     @GetMapping("/get/{id}")
-    public R getUserById(@PathVariable Integer id){
+    public R getUserById(@PathVariable Long id){
         User user = userService.getById(id);
         return R.ok().put("user",user);
     }

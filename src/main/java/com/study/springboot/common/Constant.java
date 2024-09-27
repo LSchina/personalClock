@@ -6,6 +6,7 @@ package com.study.springboot.common;
  */
 public class Constant {
 
+    public final static String PASS_SALT = "songjunhao";
 
     public final static String DEFAULT_PASSWORD="123456";
 

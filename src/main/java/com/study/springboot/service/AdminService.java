@@ -1,7 +1,7 @@
 package com.study.springboot.service;
 
 import com.study.springboot.domain.AdminQuery;
-import com.study.springboot.domain.dto.LoignDTO;
+import com.study.springboot.domain.dto.LoginDTO;
 import com.study.springboot.domain.dto.PageDTO;
 import com.study.springboot.domain.dto.UserDTO;
 import com.study.springboot.domain.pojo.Admin;
@@ -14,7 +14,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 */
 public interface AdminService extends IService<Admin> {
 
-    Admin adminLogin(LoignDTO dto);
+    Admin adminLogin(LoginDTO dto);
 
     PageDTO<Admin> adminPage(AdminQuery query);
 
