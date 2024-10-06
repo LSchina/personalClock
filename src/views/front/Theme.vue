@@ -12,7 +12,7 @@
     <div style="letter-spacing: 0.2rem;width: 100%;height: 40%">
       <div
           style="width: 100%;height: 10%;font-family: 黑体;display: flex;justify-content: center;align-items: center;box-sizing: border-box;padding-left:3rem;padding-right: 3rem;text-align: center;line-height: 30px">
-        个人打卡平台
+        You打卡
       </div>
       <div
           style="width: 100%;height: 30%;display: flex;justify-content: center;align-items: center;box-sizing: border-box;padding-left:3rem;padding-right: 3rem;text-align: center;line-height: 30px;font-size: 1.05rem">
@@ -20,7 +20,7 @@
       </div>
     </div>
     <div style="letter-spacing: 0.2rem;width: 100%;height: 20%">
-      <div style="width: 100%;height: 30%;display: flex;justify-content: center;align-items: center;">（点击前往下一页面）</div>
+      <div style="width: 100%;height: 30%;margin-top: 5rem;display: flex;justify-content: center;align-items: center;">（点击前往下一页面）</div>
     </div>
 
   </div>

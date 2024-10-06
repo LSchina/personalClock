@@ -54,6 +54,9 @@
 <script setup>
 import instance from "../../api/request.js";
 import {reactive, ref} from "vue";
+import {useRouter} from "vue-router";
+
+const router = useRouter()
 
 const show = ref(false)
 
@@ -71,6 +74,7 @@ const saveTask = () => {
       saveForm.name = ''
       saveForm.comment = ''
       saveForm.duration = 1
+      router.push('/front/task')
     }
   })
 }

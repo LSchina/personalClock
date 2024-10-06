@@ -7,7 +7,7 @@
   <el-card style="padding: 5vh 5vw 5vh 5vw;box-sizing: border-box;width: 90%;height: 60%;margin: auto;background-color: #ffffff;border-radius: 2rem">
     <div style="width: 100%;height: 100%">
       <div style="width: 100%;height: 20%;display: flex;">
-        <div style="margin: auto;font-size: 2rem;font-family: 华文中宋">自律打卡平台</div>
+        <div style="margin: auto;font-size: 2rem;">You 打卡</div>
       </div>
       <div style="width: 100%;height: 70%;margin-top: 13%">
         <van-form v-if="loginstatus == true" @submit="onSubmit">

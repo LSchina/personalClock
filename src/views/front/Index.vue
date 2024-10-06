@@ -6,7 +6,7 @@
       </van-swipe-item>
     </van-swipe>
     <van-cell
-        style="width: 100%;margin-bottom: 0.5rem;height: 3rem;--van-cell-icon-size: 1.8rem;--van-cell-large-title-font-size: 1.2rem;--van-cell-vertical-padding: 5rem;--van-cell-horizontal-padding: 1.5rem;letter-spacing: 0.15rem"
+        style="width: 100%;margin-bottom: 0.5rem;margin-top: 0.5rem;height: 3rem;--van-cell-icon-size: 1.8rem;--van-cell-large-title-font-size: 1.2rem;--van-cell-vertical-padding: 5rem;--van-cell-horizontal-padding: 1.5rem;letter-spacing: 0.15rem"
         title="系统推荐任务(点击即可添加)"
         center="center"
         size="large"/>
@@ -35,7 +35,7 @@
     <div style="width: 100%;height: 25%;padding: 5vh 5vw 5vh 5vw;box-sizing: border-box;background-color: white">
       <div style="width: 100%;height: 100%;letter-spacing: 0.1rem;line-height: 1.7rem">
         <div style="color: #706f6f">简介：</div>
-        <div style="font-size: 1.15rem;">个人学习打卡系统是一种记录个人学习时间和进度的工具，通过持续记录学习时长、学习内容和学习目标的完成情况，帮助个人保持学习的连续性和动力。</div>
+        <div style="font-size: 1.15rem;">you打卡是一种记录个人学习时间和进度的工具，通过持续记录学习时长、学习内容和学习目标的完成情况，帮助个人保持学习的连续性和动力。</div>
         <div  style="color: #706f6f">意义：</div>
         <div style="font-size: 1.15rem;">可以帮助用户更好地规划和管理自己的学习，提高学习的效果和成果。</div>
       </div>
@@ -119,6 +119,7 @@ const addRec = (id) => {
   instance.post('/task/add/' + id).then(res => {
     if (res.data.code == '200') {
       show.value = true
+      router.push('/front/task')
     }
   })
 }

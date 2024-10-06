@@ -2,7 +2,7 @@
   <div id="index_container">
     <div
         style="width: 100%;height: 7%;display: flex;justify-content: center;align-items: center;background-color: white;">
-      <div style="letter-spacing: 0.2rem;font-size: 1.1rem;color: black">自律打卡平台</div>
+      <div style="letter-spacing: 0.2rem;font-size: 1.1rem;color: black">You打卡</div>
     </div>
     <div style="width: 100%;height: 86%;padding: 0.5rem 0 0.5rem 0">
       <router-view/>
