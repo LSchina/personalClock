@@ -5,7 +5,7 @@
         <div style="display: flex">
           <el-input
               v-model="query.username"
-              style="width: 280px;"
+              style="width: 280px;;--el-input-border-color: white"
               size="large"
               placeholder="输入用户账号"
               :prefix-icon="Search"
@@ -16,7 +16,7 @@
         <div style="display: flex;margin-left: 150px">
           <el-input
               v-model="query.theme"
-              style="width: 280px"
+              style="width: 280px;--el-input-border-color: white"
               size="large"
               placeholder="输入任务主题"
               :prefix-icon="Search"
@@ -38,9 +38,14 @@
         <el-table-column  label="打卡时间" width="180" >
           <template #default="scope">{{ formatDateTimeForHMS(scope.row.finishTime) }}</template>
         </el-table-column>
-        <el-table-column prop="comment"   label="任务内容" width="250" >
+        <el-table-column  label="任务内容" width="250" >
+          <template #default="scope">
+            <div style="overflow: hidden;text-overflow: ellipsis; max-width: 250px;white-space: nowrap">
+            {{ scope.row.comment}}
+            </div>
+          </template>
         </el-table-column>
-        <el-table-column label="操作">
+        <el-table-column label="操作"  width="100" >
           <template #default="scope">
             <el-button
                 size="small"
@@ -83,7 +88,7 @@ const query = reactive({
   username:'',
   theme:'',
   pageNo: 1,
-  pageSize: 7
+  pageSize: 9
 })
 
 const searchDing = () => {

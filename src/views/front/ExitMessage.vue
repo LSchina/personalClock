@@ -31,10 +31,10 @@
     <van-cell-group inset>
       <van-field
           v-model="exitNick.nickname"
-          name="旧密码"
-          label="旧密码"
-          placeholder="请输入旧密码"
-          :rules="[{ required: true, message: '请填写旧密码' }]"
+          name="用户名"
+          label="用户名"
+          placeholder="请输入用户名"
+          :rules="[{ required: true, message: '请填写用户名' }]"
       />
     </van-cell-group>
     <div style="margin: 16px;">

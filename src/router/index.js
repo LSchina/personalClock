@@ -51,6 +51,14 @@ const router = createRouter({
                     path: '/front/exitMe',
                     component: () => import("../views/front/ExitMessage.vue")
                 },
+                {
+                    path: '/front/chart',
+                    component: () => import("../views/front/Chart.vue")
+                },
+                {
+                    path: '/front/rank',
+                    component: () => import("../views/front/Rank.vue")
+                },
 
             ]
         },
@@ -72,6 +80,10 @@ const router = createRouter({
                     component: () => import("../views/back/User.vue")
                 },
                 {
+                    path: "/back/rank",
+                    component: () => import("../views/back/Rank.vue")
+                },
+                {
                     path: "/back/admin",
                     component: () => import("../views/back/Admin.vue")
                 },
@@ -87,6 +99,7 @@ const router = createRouter({
                     path: "/back/task",
                     component: () => import("../views/back/Task.vue")
                 },
+
                 {
                     path: "/back/system",
                     component: () => import("../views/back/System.vue")
@@ -94,6 +107,10 @@ const router = createRouter({
                 {
                     path: "/back/recommend",
                     component: () => import("../views/back/Recommend.vue")
+                },
+                {
+                    path: "/back/savePoster",
+                    component: () => import("../views/back/savePoster.vue")
                 },
             ]
         },

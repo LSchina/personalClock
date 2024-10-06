@@ -1,8 +1,8 @@
 <template>
   <div id="index_container">
-    <van-swipe style="width: 100%;height: 15%;" :autoplay="3000" height="200" lazy-render>
+    <van-swipe style="width: 100%;height: 15%;" :autoplay="3000" height="280" lazy-render>
       <van-swipe-item v-for="item in imageList.value" :key="item">
-        <van-image :src="item.image"/>
+        <van-image :fit="'fill'" :src="item.image"/>
       </van-swipe-item>
     </van-swipe>
     <van-cell
@@ -21,14 +21,13 @@
         axis="xy"
         icon="plus"
         magnetic="x"
-        @offset-change="onOffsetChange"
         @click="addTask"
     />
     <div style="width: 100%;height: 8%;display: flex;justify-content: center;align-items: center">
       <div style="font-size: 1.5rem;letter-spacing: 0.2rem">功能列表</div>
     </div>
     <van-grid style="width: 100%;height: 30%" :column-num="2">
-      <van-grid-item v-for="item in iconList" style="--van-grid-item-icon-size: 2.5rem;--van-grid-item-text-font-size: 1.05rem" :key="value" :icon="item.icon" :text="item.value"/>
+      <van-grid-item v-for="item in iconList" @click="item.me"  style="--van-grid-item-icon-size: 2.5rem;--van-grid-item-text-font-size: 1.05rem" :key="value" :icon="item.icon" :text="item.value"/>
     </van-grid>
     <div style="width: 100%;height: 8%;display: flex;justify-content: center;align-items: center">
       <div style="font-size: 1.5rem;letter-spacing: 0.2rem">App简介</div>
@@ -42,7 +41,7 @@
       </div>
     </div>
   </div>
-  <van-toast v-model:show="show" style="padding: 5rem">
+  <van-toast v-model:show="show" style="padding: 2rem">
     <template #message>
       操作成功
     </template>
@@ -58,30 +57,57 @@ const router = useRouter()
 
 const imageList = reactive([])
 
+const show = ref(false)
+
+const goTask = () => {
+  router.push('/front/task')
+}
+const goUser = () => {
+  router.push('/front/system')
+}
+const goChart = () => {
+  router.push('/front/chart')
+}
+const goDing = () => {
+  router.push('/front/ding')
+}
+const goRank = () => {
+  router.push('/front/rank')
+}
+const goAdd = () => {
+  router.push('/front/add')
+}
+
 const iconList = reactive([
   {
     icon:'todo-list-o',
-    value:'打卡计时'
+    value:'打卡计时',
+    me: goTask
   },
   {
     icon:'award-o',
-    value:'任务打卡'
+    value:'任务打卡',
+    me: goDing
   },
   {
     icon:'manager-o',
-    value:'个人信息'
+    value:'个人信息',
+    me: goUser
   },
   {
     icon:'chart-trending-o',
-    value:'任务分析'
+    value:'任务分析',
+    me: goChart
   },
   {
     icon:'records-o',
-    value:'添加任务'
+    value:'添加任务',
+    me: goAdd
   },
   {
     icon:'newspaper-o',
-    value:'系统推荐'
+    value:'打卡天梯榜',
+    me: goRank
   }
 ])
 
@@ -124,5 +150,9 @@ onMounted(() =>{
   height: 200%;
   background-color: #efefef;
 
+}
+.value_class{
+  color: #0c0b0e;
+  font-size: large;
 }
 </style>

@@ -22,8 +22,8 @@
       <el-form-item label="创建时间" label-position="top">
         <el-input disabled v-model="item.createTime" />
       </el-form-item>
-      <div style="width: 100%;height: 10%;display: flex;justify-content: center;align-items: center;">
-        <el-button @click="getRecommendData(item.id)" style="width: 100%;height: 100%"><div style="letter-spacing: 2px">修改系统推荐任务</div></el-button>
+      <div style="width: 100%;height: 10%;display: flex;justify-content: center;align-items: center;margin-top: 50px">
+        <el-button type="primary" @click="getRecommendData(item.id)" style="width: 100%;height: 100%;"><div style="letter-spacing: 2px">修改系统推荐任务</div></el-button>
       </div>
       </el-form>
     </el-card>
@@ -41,7 +41,7 @@
       <el-form-item label="任务内容" :label-width="180">
         <el-input
             v-model="exitForm.comment"
-            style="width: 300px"
+            style="width: 300px;--el-input-border-color: white"
             :rows="2"
             type="textarea"
             placeholder="请输入您的学习内容"

@@ -5,7 +5,7 @@
         <div style="display: flex">
           <el-input
               v-model="adminquery.username"
-              style="width: 280px;"
+              style="width: 280px;;--el-input-border-color: white"
               size="large"
               placeholder="输入您的用户名"
               :prefix-icon="Search"
@@ -16,7 +16,7 @@
         <div style="display: flex">
           <el-input
               v-model="adminquery.nickname"
-              style="width: 280px"
+              style="width: 280px;--el-input-border-color: white"
               size="large"
               placeholder="输入您的昵称"
               :prefix-icon="Search"

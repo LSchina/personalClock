@@ -5,7 +5,7 @@
         <div style="display: flex">
           <el-input
               v-model="query.username"
-              style="width: 280px;"
+              style="width: 280px;--el-input-border-color: white"
               size="large"
               placeholder="输入用户账号"
               :prefix-icon="Search"
@@ -16,7 +16,7 @@
         <div style="display: flex">
           <el-input
               v-model="query.theme"
-              style="width: 280px"
+              style="width: 280px;--el-input-border-color: white"
               size="large"
               placeholder="输入任务主题"
               :prefix-icon="Search"
@@ -26,7 +26,7 @@
         <div style="display: flex">
           <el-input
               v-model="query.name"
-              style="width: 280px"
+              style="width: 280px;--el-input-border-color: white"
               size="large"
               placeholder="输入任务名称"
               :prefix-icon="Search"
@@ -54,7 +54,7 @@
         <el-table-column prop="status"   label="状态" width="180">
           <template #default="scope">
         <span>
-            {{scope.row.status == 1 ?'进行中': '已结束'}}
+            {{statusList(scope.row.status)}}
         </span>
           </template>
         </el-table-column>
@@ -104,8 +104,19 @@ const query = reactive({
   name:'',
   theme:'',
   pageNo: 1,
-  pageSize: 7
+  pageSize: 8
 })
+
+const statusList = (id) => {
+  switch (id) {
+    case 1:
+      return '进行中'
+    case 2:
+      return '已结束'
+    case 3:
+      return '已过期'
+  }
+}
 
 const searchTask = () => {
   instance.post('/btask/page',query).then(res =>{

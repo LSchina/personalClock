@@ -4,7 +4,7 @@
     点击查看详情打卡
   </van-notice-bar>
   <div style="display: flex;justify-content: center;align-items: center;padding: 1vh 4vw 1vh 4vw;box-sizing: border-box;width: 100%;height: 15%;background-color: white;margin-top: 3%;border-radius: 0.5rem">
-    <div style="letter-spacing: 0.2rem">温馨提示：任务最好不要超过两个，否则肯呢个会影响您的打卡效率</div>
+    <div style="letter-spacing: 0.2rem">温馨提示：任务最好不要超过两个，否则可能会影响您的打卡效率</div>
   </div>
   <div style="margin-top: 3%">
     <van-cell
@@ -39,7 +39,7 @@
       <div  style="width: 100%;height: 30%;display: flex;"><van-button @click="dingding(taskDemo.id)" type="primary" style="margin: auto;width: 40%">打卡</van-button></div>
     </div>
   </van-action-sheet>
-  <van-toast v-model:show="dingshow" style="padding: 5rem">
+  <van-toast v-model:show="dingshow" style="padding: 2rem">
     <template #message>
      <div>打卡成功</div>
     </template>
@@ -73,18 +73,10 @@ window.setInterval(()=>{
       instance.post(
           '/task/autoSubmit',
           myTaskList.value[i]
-      ).then(res => {
-        if (res.data.code == '200'){
-          instance.get('/task/nowTask').then(res => {
-            if (res.data.code == '200'){
-              myTaskList.value = res.data.list
-            }
-          })
-        }
-      })
+      )
     }
   },0)
-},5000)
+},3000)
 
 const dingding = (id) => {
   instance.post('/fding/add/' + id).then(res =>{

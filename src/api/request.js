@@ -1,6 +1,7 @@
 import axios from "axios"
 import qs from "qs"
 import useDataStore from "../store/index.js";
+import router from "../router/index.js";
 
 const useData = useDataStore()
 /**
@@ -45,8 +46,12 @@ instance.interceptors.request.use(
 
     config => {
         if (config.method === 'post') {
-            // POST接收的网络请求参数需要进行格式转化
-            config.data = qs.stringify(config.data)
+            let strings = config.url.split("/");
+            //请求拦截，防止文件转换成json
+            if (!strings.includes('addPoster')&&!strings.includes('uploadAvater')&&!strings.includes('editPoster')){
+                // POST接收的网络请求参数需要进行格式转化
+                config.data = qs.stringify(config.data)
+            }
 
         }
         config.headers['token'] = useData.token

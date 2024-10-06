@@ -1,15 +1,15 @@
 <template>
 <div id="login_container">
   <!--  header  -->
-    <div style="margin-top: 2rem;margin-left: 1rem;border-radius: 10rem;position: absolute;height: 8rem;width: 8rem;background-color: lightgreen;display: flex;" @click="goTheme">
-      <van-icon size="2rem" color="white" style="margin: auto" name="arrow-left"/>
+    <div style="margin-top: 1rem;border-radius: 10rem;position: absolute;height: 8rem;width: 8rem;background-color: #ffffff;display: flex;" @click="goTheme">
+      <van-icon size="2rem" color="black" style="margin: auto" name="arrow-left"/>
     </div>
-  <div style="padding: 5vh 5vw 5vh 5vw;box-sizing: border-box;width: 90%;height: 60%;margin: auto;background-color: #8ab98a;border-radius: 2rem">
+  <el-card style="padding: 5vh 5vw 5vh 5vw;box-sizing: border-box;width: 90%;height: 60%;margin: auto;background-color: #ffffff;border-radius: 2rem">
     <div style="width: 100%;height: 100%">
       <div style="width: 100%;height: 20%;display: flex;">
-        <div style="margin: auto;font-size: 2rem;font-family: 华文中宋">自律天堂</div>
+        <div style="margin: auto;font-size: 2rem;font-family: 华文中宋">自律打卡平台</div>
       </div>
-      <div style="width: 100%;height: 70%;margin-top: 10%">
+      <div style="width: 100%;height: 70%;margin-top: 13%">
         <van-form v-if="loginstatus == true" @submit="onSubmit">
           <van-cell-group style="background-color: transparent" inset>
             <van-field
@@ -31,13 +31,13 @@
             />
 
           </van-cell-group>
-          <div style="margin: 16px;">
-            <van-button round block style="background-color: #1bcb1b" native-type="submit">
+          <div style="margin-top: 50px;width: 100%;display: flex;justify-content: center;align-items: center">
+            <van-button  block style="background-color: #1c8ee0;width: 260px;border-radius: 10px" native-type="submit">
               登录
             </van-button>
           </div>
         </van-form>
-        <div  v-if="loginstatus == true" style="width: 100%;height: 5%;display: flex;justify-content: center;align-items: center">
+        <div  v-if="loginstatus == true" style="margin-top: 30px;width: 100%;height: 5%;display: flex;justify-content: center;align-items: center">
           <div @click="loginstatus = false"  style="text-decoration: underline">无账号?前往注册页面</div>
         </div>
         <van-form v-if="loginstatus == false" @submit="onSubmitRegister">
@@ -82,7 +82,7 @@
 
       </div>
     </div>
-  </div>
+  </el-card>
 </div>
   <van-toast v-model:show="show" style="padding: 10rem">
     <template #message>
@@ -125,7 +125,6 @@ const onSubmit = () => {
       useData.nickname = res.data.user.nickname
       useData.avater  = res.data.user.avater
       useData.token = res.data.token
-      console.log(useData)
       router.push('/front')
       show.value = true
     }

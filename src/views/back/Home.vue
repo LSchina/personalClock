@@ -2,19 +2,20 @@
 <div id="home_container">
   <div style="background-color: #545c64;width: 100%;height: 7%;display: flex;justify-content: space-between">
     <div style="margin-left: 2%;width: 68%;height: 100%;text-align: left;display: flex;align-items: center">
-      <div style="letter-spacing: 2px;font-size: 25px;color: #fff;font-weight: bolder;font-family: 华文彩云">个人学习养成后台</div>
+      <div style="letter-spacing: 2px;font-size: 25px;color: #fff;font-weight: bolder;font-family: 华文彩云">打卡app后台</div>
     </div>
-    <div style="box-sizing: border-box;width: 12%;height: 100%;display: flex;justify-content: space-between;padding: 5px 10px 5px 10px">
+    <div style="margin-left: 310px;box-sizing: border-box;width: 12%;height: 100%;display: flex;justify-content: space-between;padding: 5px 10px 5px 10px">
       <div style="height: 100%;width: 50%;display: flex">
         <div style="width: 100%;margin: auto;text-align: right;font-size: 17px;letter-spacing: 1px;color: white">{{ useData.nickname }}</div>
       </div>
-      <div style="height: 100%;width: 50%;display: flex" @click="goLogout">
+      <div style="height: 100%;width: 50%;display: flex">
         <el-avatar
             style="margin: auto"
             size="20"
           :src="useData.avater"
       /></div>
     </div>
+    <div style="width: 5%;height: 100%;display: flex"><el-button type="text" style="margin: auto;color: #fff;" @click="goLogout">退出</el-button></div>
   </div>
 
   <div style="margin-top: 0.05%;height: 92.95%;display: flex">
@@ -65,11 +66,13 @@
           </el-icon>
           <span style="font-size: 15px;letter-spacing: 2px;">打卡记录管理</span>
         </el-menu-item>
-        <el-menu-item index="/back/system">
-          <el-icon>
-            <setting/>
-          </el-icon>
-          <span style="font-size: 15px;letter-spacing: 2px;">系统管理</span>
+        <el-menu-item index="/back/poster">
+          <el-icon><CopyDocument /></el-icon>
+          <span style="font-size: 15px;letter-spacing: 2px;">广告管理</span>
+        </el-menu-item>
+        <el-menu-item index="/back/rank">
+          <el-icon><Medal /></el-icon>
+          <span style="font-size: 15px;letter-spacing: 2px;">赛季管理</span>
         </el-menu-item>
       </el-menu>
       <div style="width: 100%;height: 30%;display: flex;background-color: #545c64">
@@ -94,9 +97,10 @@ import {useRouter} from "vue-router";
 import {
   Document,
   Menu as IconMenu,
-  Setting,
+  Medal,
     House,
     User,
+  CopyDocument,
   SwitchButton
 } from '@element-plus/icons-vue'
 import {ref} from "vue";
