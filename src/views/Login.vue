@@ -84,9 +84,9 @@
     </div>
   </el-card>
 </div>
-  <van-toast v-model:show="show" style="padding: 10rem">
+  <van-toast v-model:show="show" style="padding: 5rem">
     <template #message>
-      操作成功
+      登录成功
     </template>
   </van-toast>
 
