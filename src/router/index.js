@@ -99,11 +99,6 @@ const router = createRouter({
                     path: "/back/task",
                     component: () => import("../views/back/Task.vue")
                 },
-
-                {
-                    path: "/back/system",
-                    component: () => import("../views/back/System.vue")
-                },
                 {
                     path: "/back/recommend",
                     component: () => import("../views/back/Recommend.vue")
