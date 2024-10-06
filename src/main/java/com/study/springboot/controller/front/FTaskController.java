@@ -37,18 +37,17 @@ public class FTaskController {
         return R.ok();
     }
 
-    @GetMapping("/nowTask")
-    public R nowList(){
-        List<Task> list = taskService.nowTask();
-        return R.ok().put("list",list);
-    }
-
     @GetMapping("/get/{id}")
     public R getById(@PathVariable Long id){
         Task task = taskService.getById(id);
         return R.ok().put("task",task);
     }
 
+    @GetMapping("/nowTask")
+    public R nowList(){
+        List<Task> list = taskService.nowTask();
+        return R.ok().put("list",list);
+    }
     @PostMapping("/autoSubmit")
     public R autoSubmit(TaskDTO dto) throws ParseException {
         Task task = taskService.autoSubmit(dto);

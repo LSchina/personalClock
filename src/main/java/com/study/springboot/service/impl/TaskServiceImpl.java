@@ -90,7 +90,6 @@ public class TaskServiceImpl extends ServiceImpl<TaskMapper, Task>
 
     @Override
     public void addRec(Long id) {
-
         Long userId = UserContext.getUser();
         Task one = lambdaQuery()
                 .eq(Task::getId, id)
@@ -138,7 +137,7 @@ public class TaskServiceImpl extends ServiceImpl<TaskMapper, Task>
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public Task autoSubmit(TaskDTO one) throws ParseException {
         if (one == null) {
             return null;
@@ -150,14 +149,13 @@ public class TaskServiceImpl extends ServiceImpl<TaskMapper, Task>
         Date date = sdf.parse(one.getCreateTime());
         long createTime = date.getTime();
         one.setDuration(30*60 - (time - createTime) / 1000);
-        if (time >= (createTime + 30 * 60 * 1000)) {
-            one.setStatus(3);
-        }
         Task one1 = lambdaQuery()
                 .eq(Task::getId, one.getId())
                 .one();
-        one1.setStatus(one.getStatus());
         one1.setDuration(one.getDuration());
+        if (one.getDuration() <= 0 ) {
+            one1.setStatus(3);
+        }
         boolean b = updateById(one1);
         if (!b) {
             throw new RuntimeException("无法建立心跳请求");

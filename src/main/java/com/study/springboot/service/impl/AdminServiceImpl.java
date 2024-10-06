@@ -27,7 +27,6 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin>
     implements AdminService{
 
     private static final String PASS_SALT = "songjunhao";
-
     @Override
     public Admin adminLogin(LoginDTO dto) {
         if (StringUtils.isEmpty(dto.getUsername()) || StringUtils.isEmpty(dto.getPassword())){
@@ -73,6 +72,7 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin>
     private String securePass(String password){
         return SecureUtil.md5(password + PASS_SALT);
     }
+
 }
 
 

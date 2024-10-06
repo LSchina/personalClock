@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.study.springboot.mapper.RankingMapper">
+
+    <resultMap id="BaseResultMap" type="com.study.springboot.domain.pojo.Ranking">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="userId" column="user_id" jdbcType="BIGINT"/>
+            <result property="seasonId" column="season_id" jdbcType="INTEGER"/>
+            <result property="num" column="num" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,user_id,season_id,
+        num
+    </sql>
+    <select id="selfRank" resultType="com.study.springboot.domain.vo.RankVO">
+        select user_id ,ranking
+        from
+                (select user_id ,ROW_NUMBER() OVER (ORDER BY num DESC) ranking from ranking) mytable
+        where user_id = #{userId}
+    </select>
+    <select id="ranking" resultType="com.study.springboot.domain.vo.RankVO">
+        select user_id ,ROW_NUMBER() OVER (ORDER BY num DESC) ranking from ranking limit 10
+    </select>
+</mapper>

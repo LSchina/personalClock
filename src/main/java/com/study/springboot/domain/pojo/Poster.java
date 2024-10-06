@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * 
@@ -23,11 +24,6 @@ public class Poster implements Serializable {
     /**
      * 
      */
-    private String community;
-
-    /**
-     * 
-     */
     private String url;
 
     /**
@@ -35,5 +31,13 @@ public class Poster implements Serializable {
      */
     private String image;
 
+    /**
+     *
+     */
+    private String posterDesc;
 
+    /**
+     *
+     */
+    private Date createTime;
 }

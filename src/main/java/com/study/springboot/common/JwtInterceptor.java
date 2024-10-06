@@ -12,6 +12,7 @@ import com.study.springboot.utils.UserContext;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
@@ -25,13 +26,14 @@ import java.io.UnsupportedEncodingException;
 @RequiredArgsConstructor
 public class JwtInterceptor implements HandlerInterceptor {
 
-
-
     private final UserService userService;
-
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
+        if (HttpMethod.OPTIONS.toString().equals(request.getMethod())){
+            return true;
+        }
+        System.out.println(request.getRequestURI());
         String token = request.getHeader("token");
         if (StrUtil.isBlank(token)) {
             token = request.getParameter("token");

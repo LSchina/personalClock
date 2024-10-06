@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 
 /**
  * 继承自 hutool 的集合工具类
+ * map,set,list
  */
 public class CollUtils extends CollectionUtil {
 

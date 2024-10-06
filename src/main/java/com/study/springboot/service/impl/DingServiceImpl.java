@@ -2,22 +2,23 @@ package com.study.springboot.service.impl;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.study.springboot.common.R;
 import com.study.springboot.domain.dto.DingDTO;
 import com.study.springboot.domain.dto.PageDTO;
 import com.study.springboot.domain.pojo.Ding;
+import com.study.springboot.domain.pojo.Ranking;
 import com.study.springboot.domain.pojo.Task;
 import com.study.springboot.domain.pojo.User;
 import com.study.springboot.domain.vo.DingVO;
-import com.study.springboot.service.DingService;
+import com.study.springboot.service.*;
 import com.study.springboot.mapper.DingMapper;
-import com.study.springboot.service.TaskService;
-import com.study.springboot.service.UserService;
 import com.study.springboot.utils.BeanUtils;
 import com.study.springboot.utils.CollUtils;
 import com.study.springboot.utils.StringUtils;
 import com.study.springboot.utils.UserContext;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +35,10 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class DingServiceImpl extends ServiceImpl<DingMapper, Ding>
     implements DingService{
+
+    private final SeasonService seasonService;
+
+    private final RankingService rankingService;
 
     private final UserService userService;
 
@@ -74,6 +79,7 @@ public class DingServiceImpl extends ServiceImpl<DingMapper, Ding>
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void addDing(Long id) {
         Long userId = UserContext.getUser();
         Ding ding = new Ding();
@@ -87,10 +93,26 @@ public class DingServiceImpl extends ServiceImpl<DingMapper, Ding>
         boolean b = taskService
                 .lambdaUpdate()
                 .eq(Task::getId, id)
-                .set(Task::getStatus, 2)
+                .set(Task::getStatus,2)
                 .update();
         if (!b){
             throw new RuntimeException("打卡失败！！！");
+        }
+        Ranking one = rankingService.lambdaQuery().eq(Ranking::getUserId, userId).one();
+        if (one == null){
+            Ranking ranking = new Ranking();
+            ranking.setUserId(userId);
+            ranking.setSeasonId(seasonService.count());
+            ranking.setNum(1);
+            rankingService.save(ranking);
+        }else {
+            boolean update = rankingService.lambdaUpdate()
+                    .eq(Ranking::getUserId, userId)
+                    .setSql("num = num + 1")
+                    .update();
+            if (!update){
+                throw new RuntimeException("排行榜错误！！！");
+            }
         }
         save(ding);
     }
