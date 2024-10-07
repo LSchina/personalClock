@@ -17,12 +17,6 @@
         center="center"
         @click="addRec(item.id)"
         size="large"/>
-    <van-floating-bubble
-        axis="xy"
-        icon="plus"
-        magnetic="x"
-        @click="addTask"
-    />
     <div style="width: 100%;height: 8%;display: flex;justify-content: center;align-items: center">
       <div style="font-size: 1.5rem;letter-spacing: 0.2rem">功能列表</div>
     </div>

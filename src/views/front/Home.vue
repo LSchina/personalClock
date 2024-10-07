@@ -10,6 +10,7 @@
     <van-tabbar style="width: 100%;height: 7%;" route>
       <van-tabbar-item replace to="/front/index" icon="home-o">主页</van-tabbar-item>
       <van-tabbar-item replace to="/front/task" icon="tosend">任务</van-tabbar-item>
+      <van-tabbar-item style="--van-tabbar-item-icon-size: 30px;" replace to="/front/add" icon="add-o"></van-tabbar-item>
       <van-tabbar-item replace to="/front/chart" icon="bar-chart-o">智能分析</van-tabbar-item>
       <van-tabbar-item replace to="/front/system" icon="setting-o">系统</van-tabbar-item>
     </van-tabbar>

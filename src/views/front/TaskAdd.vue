@@ -1,7 +1,7 @@
 <template>
 <div id="add_container">
   <div style="display: flex;justify-content: center;align-items: center;padding: 1vh 4vw 1vh 4vw;box-sizing: border-box;width: 100%;height: 15%;background-color: white;margin-top: 3%;border-radius: 0.5rem">
-    <div style="letter-spacing: 0.2rem">温馨提示：时间最好在半个小时之内，这样有利于提高您的学习效率</div>
+    <div style="letter-spacing: 0.2rem"><div style="margin-bottom: 6px">任务添加：</div> 时间最好在半个小时之内，这样有利于提高您的学习效率</div>
   </div>
 
   <div style="width: 100%;height: 45%;margin-top: 4%;display: flex">
